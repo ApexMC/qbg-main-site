@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:stripe-connect": "node --test tests/stripe-connect.test.mjs"
   },
   "dependencies": {
     "@mux/mux-player": "^3.11.5",
