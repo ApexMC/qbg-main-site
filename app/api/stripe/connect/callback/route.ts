@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
     return respond({ error: "Missing or invalid Stripe authorization code." }, 400);
   }
 
-  const secretKey = process.env.STRIPE_SECRET_KEY;
+  const secretKey = process.env.CONSULTING_STRIPE_SECRET_KEY;
   if (!secretKey) {
     return respond({ error: "Stripe Connect is not configured." }, 500);
   }

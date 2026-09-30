@@ -16,16 +16,21 @@ The consulting connection flow starts at `GET /api/stripe/connect` and returns t
 `GET /api/stripe/connect/callback`. Configure these server environment variables:
 
 ```dotenv
-STRIPE_SECRET_KEY=sk_test_replace_with_your_platform_secret_key
+CONSULTING_STRIPE_SECRET_KEY=sk_test_replace_with_your_consulting_platform_secret_key
 STRIPE_CONNECT_CLIENT_ID=ca_replace_with_your_platform_client_id
 STRIPE_CONNECT_REDIRECT_URI=https://quantumbeautygroup.com/api/stripe/connect/callback
 ```
 
-Use your platform account's secret key and Connect client ID from the same Stripe
-mode (test or live). Register the exact callback URL in your
+Use the consulting platform account's secret key and Connect client ID from the
+same Stripe account and mode (test or live). The Connect routes require
+`CONSULTING_STRIPE_SECRET_KEY` and do not fall back to `STRIPE_SECRET_KEY`, which
+is used by the site's subscription and billing features. Register the exact callback URL in your
 [Stripe Connect OAuth settings](https://dashboard.stripe.com/settings/connect/onboarding-options/oauth).
 For local testing, register and set
 `http://localhost:3000/api/stripe/connect/callback` instead. Production uses HTTPS.
+
+After setting or changing these variables, restart the local server or redeploy
+the site, then begin a fresh flow at `/api/stripe/connect` to obtain a new code.
 
 Send clients to `/api/stripe/connect` in their browser to begin authorization.
 This route creates a random state token in an HttpOnly, SameSite=Lax cookie that

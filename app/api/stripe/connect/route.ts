@@ -7,7 +7,7 @@ export async function GET() {
   const clientId = process.env.STRIPE_CONNECT_CLIENT_ID;
   const redirectUri = process.env.STRIPE_CONNECT_REDIRECT_URI;
 
-  if (!clientId || !redirectUri) {
+  if (!clientId || !redirectUri || !process.env.CONSULTING_STRIPE_SECRET_KEY) {
     return NextResponse.json(
       { error: "Stripe Connect is not configured." },
       { status: 500, headers: { "Cache-Control": "no-store" } },

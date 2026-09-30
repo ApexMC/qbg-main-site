@@ -24,7 +24,7 @@ const { createStripeConnectState, isValidStripeConnectState } = load("../lib/str
 if (previousLoader) load.extensions[".ts"] = previousLoader;
 else delete load.extensions[".ts"];
 
-const envNames = ["NODE_ENV", "STRIPE_SECRET_KEY", "STRIPE_CONNECT_CLIENT_ID", "STRIPE_CONNECT_REDIRECT_URI"];
+const envNames = ["NODE_ENV", "STRIPE_SECRET_KEY", "CONSULTING_STRIPE_SECRET_KEY", "STRIPE_CONNECT_CLIENT_ID", "STRIPE_CONNECT_REDIRECT_URI"];
 const originalEnv = Object.fromEntries(envNames.map((name) => [name, process.env[name]]));
 const state = "a".repeat(64);
 let exchange;
@@ -33,11 +33,15 @@ let errorLog;
 
 beforeEach(() => {
   process.env.NODE_ENV = "test";
-  process.env.STRIPE_SECRET_KEY = "sk_test_placeholder";
+  process.env.STRIPE_SECRET_KEY = "sk_test_billing_placeholder";
+  process.env.CONSULTING_STRIPE_SECRET_KEY = "sk_test_consulting_placeholder";
   process.env.STRIPE_CONNECT_CLIENT_ID = "ca_test_placeholder";
   process.env.STRIPE_CONNECT_REDIRECT_URI = "https://quantumbeautygroup.com/api/stripe/connect/callback";
   // Mock the SDK boundary: these tests never call Stripe or connect real accounts.
   exchange = mock.method(Stripe.resources.OAuth.prototype, "token", async function () {
+    const outboundRequest = { headers: {} };
+    await this._stripe._authenticator(outboundRequest);
+    assert.equal(outboundRequest.headers.Authorization, "Bearer sk_test_consulting_placeholder");
     assert.equal(this._stripe.getApiField("maxNetworkRetries"), 0);
     assert.equal(this._stripe.getApiField("timeout"), 10_000);
     return { stripe_user_id: "acct_consulting_test", access_token: "never_expose_this" };
@@ -101,7 +105,7 @@ test("production uses a Secure host-only state cookie", async () => {
   assertConsumed(result, cookie.name);
 });
 
-for (const name of ["STRIPE_CONNECT_CLIENT_ID", "STRIPE_CONNECT_REDIRECT_URI"]) {
+for (const name of ["STRIPE_CONNECT_CLIENT_ID", "STRIPE_CONNECT_REDIRECT_URI", "CONSULTING_STRIPE_SECRET_KEY"]) {
   test(`start requires ${name}`, async () => {
     delete process.env[name];
     const response = await start();
@@ -145,11 +149,20 @@ test("valid callback exchanges the code, logs only the account ID, and returns s
   assert.equal(exchange.mock.callCount(), 1);
 });
 
-test("callback fails safely when the server secret is missing", async () => {
-  delete process.env.STRIPE_SECRET_KEY;
+test("callback requires the consulting secret even when the billing secret is set", async () => {
+  delete process.env.CONSULTING_STRIPE_SECRET_KEY;
   const response = await callback(request(`code=ac_test&state=${state}`));
   assert.equal(response.status, 500);
   assert.equal(exchange.mock.callCount(), 0);
+  assertConsumed(response);
+});
+
+test("consulting OAuth works without a billing secret", async () => {
+  delete process.env.STRIPE_SECRET_KEY;
+  assert.equal((await start()).status, 303);
+  const response = await callback(request(`code=ac_test&state=${state}`));
+  assert.equal(response.status, 200);
+  assert.equal(exchange.mock.callCount(), 1);
   assertConsumed(response);
 });
 
