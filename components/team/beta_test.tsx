@@ -100,7 +100,7 @@ export default function BetaTestForm() {
         </div>
 
         <div className="mx-auto flex justify-center" aria-hidden="true">
-            <div className="h-1.5 w-sm rounded-full bg-linear-to-r from-pink-400 via-red-400 to-yellow-500" />
+            <div className="h-1.5 w-sm rounded-full bg-border" />
         </div>
 
         {/*Address Section*/}

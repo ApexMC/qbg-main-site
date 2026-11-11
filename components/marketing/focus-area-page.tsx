@@ -22,8 +22,7 @@ export default function FocusAreaPage({
       <section className="qbg-section">
         <div className="qbg-container grid items-start gap-12 lg:grid-cols-[minmax(18rem,24rem)_1fr] lg:gap-16">
           <div className="mx-auto w-full max-w-sm space-y-6 lg:mx-0">
-            <div className="relative mx-auto w-full max-w-xs">
-              <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-primary/15 blur-2xl" />
+            <div className="mx-auto w-full max-w-xs">
               <Image
                 src={image}
                 alt={`${title} education at Quantum Beauty Group`}

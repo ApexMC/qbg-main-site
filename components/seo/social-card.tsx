@@ -3,8 +3,7 @@ export default function SocialCard({ logoSrc }: { logoSrc: string }) {
     <div
       style={{
         alignItems: "center",
-        background:
-          "radial-gradient(circle at 18% 12%, rgba(244, 114, 182, 0.35), transparent 34%), linear-gradient(135deg, #fff7fb 0%, #fff 48%, #fdf2f8 100%)",
+        backgroundColor: "#fff7fb",
         color: "#18181b",
         display: "flex",
         height: "100%",

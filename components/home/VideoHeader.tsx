@@ -7,7 +7,7 @@ export default function VideoBanner() {
     <div className="qbg-container">
       <div className="relative aspect-[16/7] w-full overflow-hidden rounded-3xl bg-muted shadow-xl">
         <MuxPlayer
-          playbackId="gB2bKs6WV8dbU2AKlmzzSDkTtLNtf7UB4jVQrNqKMAA"
+          playbackId="7yxtEMvn1sGKoc00eCO64HcL5drgzxliek02oTYLiljhU"
           autoPlay="muted"
           muted
           loop

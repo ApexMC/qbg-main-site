@@ -78,10 +78,6 @@ export default function ServicesPage() {
   return (
     <main>
       <section className="relative overflow-hidden border-b border-border/70">
-        <div
-          aria-hidden="true"
-          className="absolute -right-32 -top-36 size-[28rem] rounded-full bg-primary/10 blur-3xl"
-        />
         <div className="qbg-container relative grid gap-12 py-20 sm:py-24 lg:grid-cols-[minmax(0,1fr)_19rem] lg:items-end lg:py-32">
           <div className="max-w-4xl">
             <p className="qbg-eyebrow">What we do</p>
@@ -198,10 +194,6 @@ export default function ServicesPage() {
             </article>
 
             <article className="relative overflow-hidden rounded-4xl bg-foreground p-7 text-background shadow-lg sm:p-9 dark:bg-card dark:text-card-foreground">
-              <div
-                aria-hidden="true"
-                className="absolute -bottom-28 -right-24 size-72 rounded-full bg-primary/30 blur-3xl"
-              />
               <div className="relative">
                 <div className="-mx-7 -mt-7 mb-7 flex flex-wrap items-center gap-x-3 gap-y-1 border-b border-white/10 bg-orange-300 px-7 py-3 text-primary-foreground sm:-mx-9 sm:-mt-9 sm:mb-9 sm:px-9">
                   <span className="text-xs font-bold uppercase tracking-[0.2em]">

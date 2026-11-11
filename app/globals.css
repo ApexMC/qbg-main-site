@@ -94,12 +94,7 @@
 @layer base {
   * { @apply border-border outline-ring/50; }
   html { @apply scroll-smooth font-sans; }
-  body {
-    @apply min-h-screen bg-background text-foreground antialiased;
-    background-image:
-      radial-gradient(circle at 10% 5%, color-mix(in oklab, var(--primary) 9%, transparent), transparent 26rem),
-      radial-gradient(circle at 92% 24%, color-mix(in oklab, var(--chart-3) 8%, transparent), transparent 22rem);
-  }
+  body { @apply min-h-screen bg-background text-foreground antialiased; }
   ::selection { background: color-mix(in oklab, var(--primary) 30%, transparent); }
 }
 

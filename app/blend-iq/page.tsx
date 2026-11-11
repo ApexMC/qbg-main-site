@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, Smartphone } from "lucide-react";
+import DashboardDemo from "@/components/blendiq/dashboard-demo";
 import FeatureShowcaseCard from "@/components/blendiq/feature_showcase";
 import ClientSmsConfiguration from "@/components/blendiq/sms_configuration";
 import { Badge } from "@/components/ui/badge";
@@ -41,6 +42,9 @@ export default function BlendIqPage() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline">
+                <a href="#dashboard-demo">Try the demo</a>
+              </Button>
+              <Button asChild size="lg" variant="ghost">
                 <a href="#features">Explore features</a>
               </Button>
             </div>
@@ -87,6 +91,8 @@ export default function BlendIqPage() {
           <ClientSmsConfiguration appointmentCreationEnabled remindersEnabled reminderLeadDays={3} />
         </div>
       </section>
+
+      <DashboardDemo />
 
       <section className="qbg-section border-t border-border bg-zinc-900 text-white">
         <div className="qbg-container text-center">

@@ -105,13 +105,13 @@ function PriceCard({
                       {title}
                   </h3>
                   {title === "Virtual Class" ? (
-                      <div className="rounded-full bg-linear-to-r from-blue-600 via-blue-500 to-blue-600">
+                      <div className="rounded-full bg-blue-600">
                           <p className="text-xs font-bold uppercase text-white px-2 py-1">
                               Zoom
                           </p>
                       </div>
                   ) : (
-                      <div className="rounded-full bg-linear-to-r from-pink-500 via-pink-400 to-pink-500">
+                      <div className="rounded-full bg-pink-700">
                           <p className="text-xs font-bold uppercase text-white px-2 py-1">
                               Consultation Required
                           </p>
@@ -170,9 +170,8 @@ export default function PricingPage() {
           __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c"),
         }}
       />
-      <section className="relative overflow-hidden border-b border-zinc-200 dark:border-zinc-900">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(236,72,153,0.15),transparent_35%),radial-gradient(circle_at_bottom,rgba(244,114,182,0.1),transparent_30%)]" />
-        <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <section className="border-b border-zinc-200 dark:border-zinc-900">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:py-28">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-pink-500">
               Education Pricing
